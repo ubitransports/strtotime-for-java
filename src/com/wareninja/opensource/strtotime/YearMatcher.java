@@ -12,17 +12,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-class TomorrowMatcher implements Matcher {
+public class YearMatcher implements Matcher {
 
-    private final Pattern tomorrow = Pattern.compile("\\W*tomorrow\\W*");
+    private final Pattern years = Pattern.compile("[\\-\\+]?\\d+ year");
 
     public Date tryConvert(String input, Date refDateStr) {
-        if (tomorrow.matcher(input).matches()) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_YEAR, +1);
+
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTime(refDateStr);
+    	
+        if (years.matcher(input).matches()) {
+            int y = Integer.parseInt(input.split(" ")[0]);
+            //Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, y);
             return calendar.getTime();
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

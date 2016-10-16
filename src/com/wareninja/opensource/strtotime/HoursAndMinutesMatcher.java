@@ -4,27 +4,28 @@
  */
 package com.wareninja.opensource.strtotime;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+public class HoursAndMinutesMatcher implements Matcher {
 
-class MinutesMatcher implements Matcher {
-
-    private final Pattern minutes = Pattern.compile("[\\-\\+]?\\d+ minutes");
+    private final Pattern time = Pattern.compile("[\\-\\+]?\\d+ hour [\\-\\+]?\\d+ minutes");
 
     public Date tryConvert(String input, Date refDateStr) {
 
     	Calendar calendar = Calendar.getInstance();
-    	calendar.setTime(refDateStr);
+        calendar.setTime(refDateStr);
 
-        if (minutes.matcher(input).matches()) {
-            int m = Integer.parseInt(input.split(" ")[0]);
+        if (time.matcher(input).matches()) {
+            int h = Integer.parseInt(input.split(" ")[0]);
+            int m = Integer.parseInt(input.split(" ")[2]);
+
             //Calendar calendar = Calendar.getInstance();
             
-            calendar.add(Calendar.MINUTE, m);
+            calendar.add(Calendar.HOUR,h);
+            calendar.add(Calendar.MINUTE,m);
             return calendar.getTime();
         }
 

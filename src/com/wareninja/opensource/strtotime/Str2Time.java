@@ -9,6 +9,7 @@
 package com.wareninja.opensource.strtotime;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,13 @@ public final class Str2Time {
         matchers.add(new YesterdayMatcher());
         matchers.add(new DaysMatcher());
         matchers.add(new WeeksMatcher());
+        matchers.add(new MonthsMatcher());
+        matchers.add(new HoursMatcher());
+        matchers.add(new YearMatcher());
+        matchers.add(new SpecificTimeMatcher());
+        matchers.add(new HoursAndMinutesMatcher());
+        matchers.add(new NextOrLastOnDayMatcher());
+        matchers.add(new NextOrLastMonthsMatcher());
         
         matchers.add(new MinutesMatcher());
         
@@ -52,9 +60,9 @@ public final class Str2Time {
     }
     
     public static Date convert(String input) {
-    	return convert(input, "");
+    	return convert(input, Calendar.getInstance().getTime());
     }
-    public static Date convert(String input, String refDateStr) {
+    public static Date convert(String input, Date refDateStr) {
         for (Matcher matcher : matchers) {
             Date date = matcher.tryConvert(input, refDateStr);
 

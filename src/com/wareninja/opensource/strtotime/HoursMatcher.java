@@ -8,23 +8,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
+public class HoursMatcher implements Matcher {
 
-class MinutesMatcher implements Matcher {
-
-    private final Pattern minutes = Pattern.compile("[\\-\\+]?\\d+ minutes");
+    private final Pattern hours = Pattern.compile("[\\-\\+]?\\d+ hour");
 
     public Date tryConvert(String input, Date refDateStr) {
 
     	Calendar calendar = Calendar.getInstance();
-    	calendar.setTime(refDateStr);
-
-        if (minutes.matcher(input).matches()) {
+        calendar.setTime(refDateStr);
+    	
+        if (hours.matcher(input).matches()) {
             int m = Integer.parseInt(input.split(" ")[0]);
             //Calendar calendar = Calendar.getInstance();
-            
-            calendar.add(Calendar.MINUTE, m);
+            calendar.add(Calendar.HOUR, m);
             return calendar.getTime();
         }
 

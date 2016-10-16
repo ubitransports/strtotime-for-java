@@ -8,21 +8,27 @@
 
 package com.wareninja.opensource.strtotime;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-class TomorrowMatcher implements Matcher {
+public class MonthsMatcher implements Matcher {
 
-    private final Pattern tomorrow = Pattern.compile("\\W*tomorrow\\W*");
+    private final Pattern months = Pattern.compile("[\\-\\+]?\\d?\\d+ month");
 
     public Date tryConvert(String input, Date refDateStr) {
-        if (tomorrow.matcher(input).matches()) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_YEAR, +1);
+
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTime(refDateStr);
+    	
+        if (months.matcher(input).matches()) {
+            int w = Integer.parseInt(input.split(" ")[0]);
+            //Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, w);
             return calendar.getTime();
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

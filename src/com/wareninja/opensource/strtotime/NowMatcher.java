@@ -16,7 +16,7 @@ class NowMatcher implements Matcher {
     private static final Pattern now = Pattern.compile("\\W*now\\W*");
     private static final Pattern today = Pattern.compile("\\W*today\\W*");
 
-    public Date tryConvert(String input, String refDateStr) {
+    public Date tryConvert(String input, Date refDateStr) {
         if (now.matcher(input).matches() || today.matcher(input).matches()) {
             return new Date();
         } else {

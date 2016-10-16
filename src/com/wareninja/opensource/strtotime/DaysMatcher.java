@@ -19,17 +19,11 @@ class DaysMatcher implements Matcher {
 
     private final Pattern days = Pattern.compile("[\\-\\+]?\\d+ days");
 
-    public Date tryConvert(String input, String refDateStr) {
+    public Date tryConvert(String input, Date refDateStr) {
 
     	Calendar calendar = Calendar.getInstance();
-    	if (!StringUtils.isEmpty(refDateStr)) {
-    		try {
-    			calendar.setTime( DateUtils.parseDate(refDateStr, new String[] {"yyyy-MM-dd"}) );
-    		}
-    		catch (Exception ex) {
-    		}
-    	}
-    	
+        calendar.setTime(refDateStr);
+
         if (days.matcher(input).matches()) {
             int d = Integer.parseInt(input.split(" ")[0]);
             //Calendar calendar = Calendar.getInstance();

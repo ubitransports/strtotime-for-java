@@ -16,7 +16,7 @@ public class YesterdayMatcher implements Matcher {
 
     private final Pattern yesterday = Pattern.compile("yesterday");
 
-    public Date tryConvert(String input, String refDateStr) {
+    public Date tryConvert(String input, Date refDateStr) {
         if (yesterday.matcher(input).matches()) {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_YEAR, -1);
