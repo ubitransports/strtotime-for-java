@@ -1,5 +1,6 @@
 package com.wareninja.opensource.strtotime;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Assert;
@@ -13,8 +14,10 @@ public class Str2TimeTest extends TestCase{
 	}
 
 	public void test_lib() {
-        Date refDate = new Date(1476568800000L); //October 16th, 2016 00:00 AM
-        Assert.assertEquals(1476568800000L, refDate.getTime());
+        Date refDateDate = new Date(1476568800000L); //October 16th, 2016 00:00 AM
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String refDate = formater.format(refDateDate);
+        Assert.assertEquals(1476568800000L, refDateDate.getTime());
         Assert.assertEquals(1476568800000L + 60 * 1000, Str2Time.convert("1 minutes", refDate).getTime());
         Assert.assertEquals(1476568800000L + 15 * 60 * 1000, Str2Time.convert("15 minutes", refDate).getTime());
         Assert.assertEquals(1476568800000L + 30 * 60 * 1000, Str2Time.convert("30 minutes", refDate).getTime());

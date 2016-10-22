@@ -60,9 +60,9 @@ public final class Str2Time {
     }
     
     public static Date convert(String input) {
-    	return convert(input, Calendar.getInstance().getTime());
+    	return convert(input, "");
     }
-    public static Date convert(String input, Date refDateStr) {
+    public static Date convert(String input, String refDateStr) {
         for (Matcher matcher : matchers) {
             Date date = matcher.tryConvert(input, refDateStr);
 

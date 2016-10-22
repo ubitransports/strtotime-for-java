@@ -16,7 +16,7 @@ class TomorrowMatcher implements Matcher {
 
     private final Pattern tomorrow = Pattern.compile("\\W*tomorrow\\W*");
 
-    public Date tryConvert(String input, Date refDateStr) {
+    public Date tryConvert(String input, String refDateStr) {
         if (tomorrow.matcher(input).matches()) {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_YEAR, +1);

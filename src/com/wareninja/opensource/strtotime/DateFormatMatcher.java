@@ -20,7 +20,7 @@ class DateFormatMatcher implements Matcher {
         this.dateFormat = dateFormat;
     }
 
-    public Date tryConvert(String input, Date refDateStr) {
+    public Date tryConvert(String input, String refDateStr) {
         try {
             return dateFormat.parse(input);
         } catch (ParseException ex) {

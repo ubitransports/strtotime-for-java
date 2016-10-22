@@ -19,6 +19,6 @@ public interface Matcher {
 	 * 
 	 * @return the converted Date
 	 */
-	public abstract Date tryConvert(String input, Date refDateStr);
+	public abstract Date tryConvert(String input, String refDateStr);
 
 }

@@ -8,6 +8,8 @@
 
 package com.wareninja.opensource.strtotime;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -19,10 +21,18 @@ class WeeksMatcher implements Matcher {
 
     private final Pattern weeks = Pattern.compile("[\\-\\+]?\\d+ (week|weeks)");
 
-    public Date tryConvert(String input, Date refDateStr) {
+    public Date tryConvert(String input, String refDateStr) {
 
-    	Calendar calendar = Calendar.getInstance();
-    	calendar.setTime(refDateStr);
+    	if (refDateStr.isEmpty()) {
+			return null;
+		}
+		Calendar calendar = Calendar.getInstance();
+		try {
+			calendar.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(refDateStr));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
     	
         if (weeks.matcher(input).matches()) {
             int w = Integer.parseInt(input.split(" ")[0]);
